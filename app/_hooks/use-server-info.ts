@@ -79,6 +79,8 @@ export default function useServerInfo(ip: string) {
   return useQuery<ServerInfo>({
     queryKey: ['server-info', ip],
     queryFn: () => fetchServerInfo(ip),
+
+    enabled: !!ip,
   });
 }
 
