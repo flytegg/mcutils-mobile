@@ -19,6 +19,11 @@ export default function Home() {
           <Text>Server Info</Text>
         </Button>
       </Link>
+      <Link href={{ pathname: '/tools/item-ids' }} asChild>
+        <Button>
+          <Text>Item IDs</Text>
+        </Button>
+      </Link>
     </View>
   );
 }
