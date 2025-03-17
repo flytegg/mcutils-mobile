@@ -1,8 +1,9 @@
 import { Stack } from 'expo-router';
 import { useState } from 'react';
-import { FlatList, Image, Text, TextInput, View } from 'react-native';
+import { FlatList, Image, TextInput, View } from 'react-native';
 import { useDebounce } from 'use-debounce';
 
+import { Text } from '@/components/Text';
 import useServerInfo from '@/app/_hooks/use-server-info';
 import { Input } from '@/components/Input';
 
@@ -15,7 +16,7 @@ export default function Home() {
   return (
     <>
       <Stack.Screen options={{ title: 'Server Info' }} />
-      <Text>Enter your server IP</Text>
+      <Text className="text-white">Enter your server IP</Text>
       <Input
         className="bg-neutral-800 text-white"
         autoCorrect={false}
