@@ -5,11 +5,8 @@
     "jsx": "react-jsx",
     "baseUrl": ".",
     "paths": {
-      "~/*": [
-        "*"
-      ],
       "@/*": [
-        "./*"
+        "*"
       ],
       "tailwind.config": [
         "./tailwind.config.js"
