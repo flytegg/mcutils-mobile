@@ -1,4 +1,4 @@
-import { ITEM_IDS_ICON, SERVER_INFO_ICON } from '@/app/_constants/icons';
+import { COLOR_CODES_ICON, ITEM_IDS_ICON, SERVER_INFO_ICON, SKIN_STEALER_ICON } from '@/app/_constants/icons';
 import { Button } from '@/components/Button';
 import { Logo } from '@/components/Logo';
 import { Text } from '@/components/Text';
@@ -18,6 +18,12 @@ const utils = [
     description: 'Modern & legacy item IDs',
     href: '/tools/item-ids' as const,
     icon: ITEM_IDS_ICON,
+  },
+  {
+    name: 'Color Codes',
+    description: 'Color codes for Minecraft',
+    href: '/tools/color-codes' as const,
+    icon: COLOR_CODES_ICON,
   },
 ];
 

@@ -69,6 +69,7 @@ export default function ItemIds() {
           <TextInput
             className="h-12 w-full rounded-md border border-neutral-700 bg-neutral-800 px-3 text-white"
             placeholder="Enter item name..."
+            keyboardAppearance="dark"
             placeholderTextColor="#666"
             onChangeText={updateSearch}
             autoCorrect={false}

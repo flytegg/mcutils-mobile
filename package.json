@@ -49,6 +49,8 @@
     "react-native-screens": "~4.4.0",
     "react-native-svg": "^15.11.2",
     "react-native-web": "~0.19.10",
+    "react-native-webview": "^13.13.4",
+    "react-skinview3d": "^5.1.0",
     "tailwind-merge": "^3.0.2",
     "tailwindcss-animate": "^1.0.7",
     "use-debounce": "^10.0.4",

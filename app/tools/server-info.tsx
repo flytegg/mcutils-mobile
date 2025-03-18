@@ -25,6 +25,7 @@ export default function Home() {
         <View className="flex-row items-center gap-2 rounded-lg border border-neutral-800 bg-neutral-900 p-3">
           <SearchIcon className="text-neutral-400" size={20} />
           <Input
+            keyboardAppearance="dark"
             className="flex-1 border-none bg-transparent text-white ring-transparent"
             autoCorrect={false}
             autoCapitalize="none"
