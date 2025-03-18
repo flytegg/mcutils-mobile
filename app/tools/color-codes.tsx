@@ -25,7 +25,7 @@ const colorCodes = [
 ];
 
 const formatCodes = [
-  { code: '§k', name: 'Obfuscated', description: 'Makes text randomized', className: 'obfuscated' },
+  { code: '§k', name: 'Magic', description: 'Makes text randomized', className: 'obfuscated' },
   { code: '§l', name: 'Bold', description: 'Makes text bold', className: 'font-bold' },
   {
     code: '§m',
