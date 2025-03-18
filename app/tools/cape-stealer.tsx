@@ -1,15 +1,134 @@
-import { Input } from '@/components/Input'
-import React from 'react'
+import { Button } from '@/components/Button';
+import { Input } from '@/components/Input';
+import { Picker } from '@react-native-picker/picker';
+import { useState } from 'react';
+import { Text, View, Image, ScrollView, StyleSheet } from 'react-native';
 
-export default function capestealer() {
+interface Cape {
+  exists: boolean;
+  imageUrls: {
+    base: {
+      front: string;
+    }
+  };
+  width: number;
+  height: number;
+  extension: string;
+}
+
+export default function CapeStealer() {
+  const [username, setUsername] = useState('');
+  const [title, setTitle] = useState('Cape Stealer');
+  const [capes, setCapes] = useState<{ [key: string]: Cape }>({});
+  const [selectedCapeType, setSelectedCapeType] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  const stealCape = async (username: string) => {
+    if (!username.trim()) {
+      setTitle('Invalid username!');
+      setCapes({});
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const response = await fetch(`https://api.capes.dev/load/${username}`, {
+        headers: {
+          'User-Agent': 'CapeStealer/v1.0'
+        }
+      });
+      if (response.ok) {
+        const jsonResponse = await response.json();
+        setCapes(jsonResponse);
+
+        const availableCapeTypes = Object.keys(jsonResponse).filter(
+          (type) => jsonResponse[type]?.exists
+        );
+
+        if (availableCapeTypes.length > 0) {
+          setSelectedCapeType(availableCapeTypes[0]);
+          setTitle(`${username}'s Capes`);
+          return;
+        }
+        setTitle('No capes found for this user!');
+        setCapes({});
+        return;
+      }
+      setTitle('Invalid username!');
+      setCapes({});
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const availableCapeTypes = Object.keys(capes).filter(
+    (type) => capes[type]?.exists === true
+  );
+
   return (
-    <>
-      <h1 className='text-center font-semibold text-3xl uppercase flex justify-center align-center flex-col p-14'>Cape Stealer</h1>
-      <div className='flex justify-center'>
-        <div className='w-96'>
-          <Input className='w-1/3' placeholder='Enter a username' />
-        </div>
-      </div>
-    </>
-  )
+    <ScrollView>
+      <View className="p-4">
+        <Text className="text-center text-3xl font-bold text-white my-7 uppercase">
+          {title}
+        </Text>
+
+        <View className="flex-row mb-5 justify-center">
+          <Input
+            value={username}
+            onChangeText={setUsername}
+            placeholder="Enter a username"
+            className="mr-2 bg-black text-white"
+          />
+          <Button
+            onPress={() => stealCape(username)}
+            disabled={loading}
+            className="p-2 rounded bg-white"
+          >
+            <Text className="text-black font-semibold">{loading ? 'Loading...' : 'Steal Cape'}</Text>
+          </Button>
+        </View>
+
+        {availableCapeTypes.length > 0 && (
+          <View className="mb-5 ">
+            <Text className="font-bold text-white text-center mt-6">Select Cape Type:</Text>
+            <View className="mt-[-20px]">
+              <Picker
+                selectedValue={selectedCapeType}
+                onValueChange={(itemValue) => setSelectedCapeType(itemValue)}
+              >
+                {availableCapeTypes.map((type) => (
+                  <Picker.Item
+                    key={type}
+                    label={type.charAt(0).toUpperCase() + type.slice(1)}
+                    value={type}
+                    color='white'
+                  />
+                ))}
+              </Picker>
+            </View>
+          </View>
+        )}
+
+        {selectedCapeType && capes[selectedCapeType]?.exists && (
+          <View className="items-center">
+            <Text className="font-bold mb-8 text-white text-3xl">Cape Preview:</Text>
+            <View className="items-center">
+            <Image
+              source={{ uri: capes[selectedCapeType].imageUrls.base.front }}
+              style={{
+                width: capes[selectedCapeType].width,
+                height: capes[selectedCapeType].height,
+                backgroundColor: 'transparent'
+              }}
+              resizeMode="stretch" 
+            />
+              <Text className="text-center mt-2 text-white">
+                {selectedCapeType.charAt(0).toUpperCase() + selectedCapeType.slice(1)} Cape
+              </Text>
+            </View>
+          </View>
+        )}
+      </View>
+    </ScrollView>
+  );
 }
