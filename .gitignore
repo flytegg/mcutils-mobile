@@ -1,5 +1,11 @@
 node_modules/
 .expo/
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/*.code-snippets
 dist/
 npm-debug.*
 *.jks
@@ -9,14 +15,15 @@ npm-debug.*
 *.mobileprovision
 *.orig.*
 web-build/
-# expo router
 expo-env.d.ts
-
-
 
 ios
 android
 
+.history
+.history/
+.ionide
+*.vsix
 # macOS
 .DS_Store
 
