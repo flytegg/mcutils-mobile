@@ -25,6 +25,12 @@ const utils = [
     href: '/tools/color-codes' as const,
     icon: COLOR_CODES_ICON,
   },
+  {
+    name: 'Inventory Slots',
+    description: 'Slot numbers for every inventory type',
+    href: '/tools/inventory-slots' as const,
+    icon: COLOR_CODES_ICON,
+  },
 ];
 
 export default function Home() {
