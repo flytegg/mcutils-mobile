@@ -1,4 +1,4 @@
-import { COLOR_CODES_ICON, ITEM_IDS_ICON, SERVER_INFO_ICON, SKIN_STEALER_ICON } from '@/app/_constants/icons';
+import { COLOR_CODES_ICON, ITEM_IDS_ICON, SERVER_INFO_ICON, CAPE_STEALER_ICON } from '@/app/_constants/icons';
 import { Button } from '@/components/Button';
 import { Logo } from '@/components/Logo';
 import { Text } from '@/components/Text';
@@ -35,7 +35,7 @@ const utils = [
     name: 'Cape Stealer',
     description: "Steal people's cape and use it yourself",
     href: '/tools/cape-stealer' as const,
-    icon: COLOR_CODES_ICON,
+    icon: CAPE_STEALER_ICON,
   }
 ];
 

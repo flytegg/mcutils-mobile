@@ -46,4 +46,10 @@
         --input: 240 3.7% 15.9%;
         --ring: 240 4.9% 83.9%;
     }
+
+    .pixelated {
+        image-rendering: pixelated;
+        image-rendering: -moz-crisp-edges;
+        image-rendering: crisp-edges;
+    }
 }

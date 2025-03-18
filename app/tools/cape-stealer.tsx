@@ -1,8 +1,9 @@
 import { Button } from '@/components/Button';
 import { Input } from '@/components/Input';
 import { Picker } from '@react-native-picker/picker';
-import { useState } from 'react';
-import { Text, View, Image, ScrollView, StyleSheet } from 'react-native';
+import { useState, useEffect } from 'react';
+import { Text, View, Image, ScrollView, Alert, Share, Platform, PermissionsAndroid } from 'react-native';
+import * as FileSystem from 'expo-file-system';
 
 interface Cape {
   exists: boolean;
@@ -22,6 +23,28 @@ export default function CapeStealer() {
   const [capes, setCapes] = useState<{ [key: string]: Cape }>({});
   const [selectedCapeType, setSelectedCapeType] = useState('');
   const [loading, setLoading] = useState(false);
+  const [sharing, setSharing] = useState(false);
+
+  const shareCape = async (cape: Cape) => {
+    if (!cape || !cape.exists) return;
+    
+    setSharing(true);
+    try {
+      const imageUrl = cape.imageUrls.base.front;
+      
+      await Share.share({
+        url: imageUrl,
+        message: `I got this cape from MCUtils-Mobile, you should check it out!`,
+        title: 'Check out this cape i got from MCUtils-Mobile!'
+      });
+      
+    } catch (error) {
+      console.error('Sharing error:', error);
+      Alert.alert('Error', 'An error occurred while sharing the cape');
+    } finally {
+      setSharing(false);
+    }
+  };
 
   const stealCape = async (username: string) => {
     if (!username.trim()) {
@@ -89,9 +112,9 @@ export default function CapeStealer() {
         </View>
 
         {availableCapeTypes.length > 0 && (
-          <View className="mb-5 ">
-            <Text className="font-bold text-white text-center mt-6">Select Cape Type:</Text>
-            <View className="mt-[-20px]">
+          <View>
+            <Text className="font-bold text-white text-center mt-2">Select Cape Type:</Text>
+            <View className="">
               <Picker
                 selectedValue={selectedCapeType}
                 onValueChange={(itemValue) => setSelectedCapeType(itemValue)}
@@ -116,15 +139,26 @@ export default function CapeStealer() {
             <Image
               source={{ uri: capes[selectedCapeType].imageUrls.base.front }}
               style={{
-                width: capes[selectedCapeType].width,
-                height: capes[selectedCapeType].height,
-                backgroundColor: 'transparent'
+                height: 162,
+                width: 100,
               }}
-              resizeMode="stretch" 
+              resizeMode="cover"
+              fadeDuration={0}
             />
               <Text className="text-center mt-2 text-white">
                 {selectedCapeType.charAt(0).toUpperCase() + selectedCapeType.slice(1)} Cape
               </Text>
+            </View>
+            <View className="flex-row mt-5 space-x-3">
+              <Button
+                onPress={() => shareCape(capes[selectedCapeType])}
+                disabled={sharing}
+                className="p-2 rounded bg-green-200"
+              >
+                <Text className="text-black font-semibold">
+                  {sharing ? 'Opening...' : 'Share Cape'}
+                </Text>
+              </Button>
             </View>
           </View>
         )}
