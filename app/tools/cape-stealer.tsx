@@ -1,9 +1,8 @@
 import { Button } from '@/components/Button';
 import { Input } from '@/components/Input';
 import { Picker } from '@react-native-picker/picker';
-import { useState, useEffect } from 'react';
-import { Text, View, Image, ScrollView, Alert, Share, Platform, PermissionsAndroid } from 'react-native';
-import * as FileSystem from 'expo-file-system';
+import { useState } from 'react';
+import { Text, View, Image, ScrollView, Alert, Share} from 'react-native';
 
 interface Cape {
   exists: boolean;
