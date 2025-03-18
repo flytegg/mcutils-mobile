@@ -17,9 +17,7 @@ export default function ItemIds() {
   const updateSearch = useCallback((query: string) => {
     const lowercase = query.toLowerCase();
     setSearchResults(
-      itemsData.filter((item) =>
-        item.name.toLowerCase().replace(' ', '').includes(lowercase)
-      )
+      itemsData.filter((item) => item.name.toLowerCase().replace(' ', '').includes(lowercase))
     );
   }, []);
 
@@ -27,18 +25,14 @@ export default function ItemIds() {
     <View className="flex-row items-center border-b border-[#232324] py-2">
       <View className="w-8 items-center justify-center px-1">
         {item.texture && (
-          <Image
-            source={{ uri: item.texture }}
-            className="h-5 w-5"
-            alt={`${item.name} Icon`}
-          />
+          <Image source={{ uri: item.texture }} className="h-5 w-5" alt={`${item.name} Icon`} />
         )}
       </View>
       <View className="flex-1 px-2">
         <Text className="text-[#cecece]">{item.name}</Text>
       </View>
       <View className="flex-1 px-2">
-        <Text className="text-[#cecece] break-all">{item.newID}</Text>
+        <Text className="break-all text-[#cecece]">{item.newID}</Text>
       </View>
       <View className="w-[24%] px-2">
         <Text className="text-[#cecece]">{item.legacyID || ''}</Text>
@@ -50,7 +44,7 @@ export default function ItemIds() {
   );
 
   const ListHeader = () => (
-    <View className="flex-row items-center border-b-[1.5px] border-[#232324] py-2">
+    <View className="flex-row items-center border-b-[1.5px] border-[#232324] bg-neutral-900 py-2">
       <View className="w-8 px-1" />
       <View className="flex-1 px-2">
         <Text className="font-medium text-[#9d9d9e]">Display Name</Text>
@@ -96,4 +90,4 @@ export default function ItemIds() {
       </View>
     </>
   );
-} 
+}
