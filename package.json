@@ -9,7 +9,7 @@
     "prebuild": "expo prebuild",
     "lint": "eslint \"**/*.{js,jsx,ts,tsx}\" && prettier -c \"**/*.{js,jsx,ts,tsx,json}\"",
     "format": "eslint \"**/*.{js,jsx,ts,tsx}\" --fix && prettier \"**/*.{js,jsx,ts,tsx,json}\" --write",
-    "web": "DARK_MODE=media expo start --web"
+    "web": "cross-env DARK_MODE=media expo start --web"
   },
   "dependencies": {
     "@expo/vector-icons": "^14.0.0",

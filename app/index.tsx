@@ -31,6 +31,12 @@ const utils = [
     href: '/tools/inventory-slots' as const,
     icon: COLOR_CODES_ICON,
   },
+  {
+    name: 'Cape Stealer',
+    description: "Steal people's cape and use it yourself",
+    href: '/tools/cape-stealer' as const,
+    icon: COLOR_CODES_ICON,
+  }
 ];
 
 export default function Home() {
