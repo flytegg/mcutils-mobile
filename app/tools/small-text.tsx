@@ -39,9 +39,9 @@ export default function smalltext() {
   
   return (
     <ScrollView>
-      <View className='flex flex-col justify-center items-center mt-5'>
-        <Text className='text-white text-3xl font-bold uppercase mb-5'>Small Text Converter</Text>
-        <Text className='text-gray-200 text-xs w-80 text-center mb-5'>Convert your text to a smaller one supported by Minecraft.</Text>
+      <View className='flex flex-col justify-center items-center mt-4'>
+        <Text className='text-white text-3xl font-bold uppercase p-8'>Small Text Converter</Text>
+        <Text className='text-gray-200 text-xs w-80 text-center mb-12'>Convert your text to a smaller one supported by Minecraft.</Text>
         
         <View className="w-80 mb-24">
           <Input

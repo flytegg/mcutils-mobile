@@ -40,7 +40,7 @@ const utils = [
   {
     name: 'Small Text',
     description: 'Convert your text to a smaller one supported by Minecraft.',
-    href: '/tools/smalltext' as const,
+    href: '/tools/small-text' as const,
     icon: SMALL_TEXT_CONVERTER_ICON,
   }
 ];
