@@ -1,4 +1,4 @@
-import { COLOR_CODES_ICON, ITEM_IDS_ICON, SERVER_INFO_ICON, CAPE_STEALER_ICON } from '@/app/_constants/icons';
+import { COLOR_CODES_ICON, ITEM_IDS_ICON, SERVER_INFO_ICON, CAPE_STEALER_ICON, SMALL_TEXT_CONVERTER_ICON } from '@/app/_constants/icons';
 import { Button } from '@/components/Button';
 import { Logo } from '@/components/Logo';
 import { Text } from '@/components/Text';
@@ -36,6 +36,12 @@ const utils = [
     description: "Steal people's cape and use it yourself",
     href: '/tools/cape-stealer' as const,
     icon: CAPE_STEALER_ICON,
+  },
+  {
+    name: 'Small Text',
+    description: 'Convert your text to a smaller one supported by Minecraft.',
+    href: '/tools/small-text' as const,
+    icon: SMALL_TEXT_CONVERTER_ICON,
   }
 ];
 

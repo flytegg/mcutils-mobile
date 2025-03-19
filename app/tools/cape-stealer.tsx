@@ -152,7 +152,7 @@ export default function CapeStealer() {
               <Button
                 onPress={() => shareCape(capes[selectedCapeType])}
                 disabled={sharing}
-                className="p-2 rounded bg-green-200"
+                className="p-2 rounded bg-blue-200"
               >
                 <Text className="text-black font-semibold">
                   {sharing ? 'Opening...' : 'Share Cape'}
