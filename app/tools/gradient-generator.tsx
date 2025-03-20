@@ -77,56 +77,54 @@ export default function gradientgenerator() {
           </View>
         </View>
 
-        <View className="flex-1 mb-6 relative">
-          <View>
-            <Text className='text-white text-xs mb-2'>Chat Message</Text>
-            <Input
-              value={gradient}
-              editable={false}
-              placeholder="Minecraft Chat Message..."
-              className="bg-black text-white min-h-[30px] pr-12 px-4"
-              multiline={true}
-              textAlignVertical="center"
-              scrollEnabled={true}
+        <View className="flex-1 mb-4 relative">
+          <Text className='text-white text-xs mb-2'>Chat Message</Text>
+          <Input
+            value={gradient}
+            editable={false}
+            placeholder="Minecraft Chat Message..."
+            className="bg-black text-white min-h-[30px] pr-12 px-4"
+            multiline={true}
+            textAlignVertical="center"
+            scrollEnabled={true}
+          />
+          <TouchableOpacity
+            onPress={copyGradient}
+            className="absolute right-3 top-9"
+            disabled={!gradient}
+          >
+            <Ionicons
+              name={copied ? "checkmark-circle" : "copy-outline"}
+              size={24}
+              color={gradient ? "#60a5fa" : "#9ca3af"}
             />
-            <TouchableOpacity
-              onPress={copyGradient}
-              className="absolute right-3 top-9"
-              disabled={!gradient}
-            >
-              <Ionicons
-                name={copied ? "checkmark-circle" : "copy-outline"}
-                size={24}
-                color={gradient ? "#60a5fa" : "#9ca3af"}
-              />
-            </TouchableOpacity>
-          </View>
-          <View className='mt-2'>
-            <Text className='text-white text-xs mb-2'>MiniMessage</Text>
-            <Input
-              value={gradientMini}
-              editable={false}
-              placeholder="MiniMessage equivalent..."
-              className="bg-black text-white min-h-[30px] pr-12 px-4"
-              multiline={true}
-              textAlignVertical="center"
-              scrollEnabled={true}
+          </TouchableOpacity>
+        </View>
+        <View className='mt-2'>
+          <Text className='text-white text-xs mb-2'>MiniMessage</Text>
+          <Input
+            value={gradientMini}
+            editable={false}
+            placeholder="MiniMessage equivalent..."
+            className="bg-black text-white min-h-[30px] pr-12 px-4"
+            multiline={true}
+            textAlignVertical="center"
+            scrollEnabled={true}
+          />
+          <TouchableOpacity
+            onPress={copyGradientMini}
+            className="absolute right-3 top-9"
+            disabled={!gradientMini}
+          >
+            <Ionicons
+              name={copiedMini ? "checkmark-circle" : "copy-outline"}
+              size={24}
+              color={gradientMini ? "#60a5fa" : "#9ca3af"}
             />
-            <TouchableOpacity
-              onPress={copyGradientMini}
-              className="absolute right-3 top-9"
-              disabled={!gradientMini}
-            >
-              <Ionicons
-                name={copiedMini ? "checkmark-circle" : "copy-outline"}
-                size={24}
-                color={gradientMini ? "#60a5fa" : "#9ca3af"}
-              />
-            </TouchableOpacity>
-          </View>
+          </TouchableOpacity>
         </View>
 
-        <View className='flex-row mb-6'>
+        <View className='flex-row my-4'>
           <Button
             onPress={calculateGradient}
             className="rounded bg-white flex-1"
