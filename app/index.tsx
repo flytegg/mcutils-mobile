@@ -1,4 +1,4 @@
-import { COLOR_CODES_ICON, ITEM_IDS_ICON, SERVER_INFO_ICON, CAPE_STEALER_ICON, SMALL_TEXT_CONVERTER_ICON } from '@/app/_constants/icons';
+import { COLOR_CODES_ICON, ITEM_IDS_ICON, SERVER_INFO_ICON, CAPE_STEALER_ICON, SMALL_TEXT_CONVERTER_ICON, GRADIENT_GENERATOR_ICON, INVENTORY_SLOTS_ICON } from '@/app/_constants/icons';
 import { Button } from '@/components/Button';
 import { Logo } from '@/components/Logo';
 import { Text } from '@/components/Text';
@@ -29,11 +29,11 @@ const utils = [
     name: 'Inventory Slots',
     description: 'Slot numbers for every inventory type',
     href: '/tools/inventory-slots' as const,
-    icon: COLOR_CODES_ICON,
+    icon: INVENTORY_SLOTS_ICON,
   },
   {
     name: 'Cape Stealer',
-    description: "Steal people's cape and use it yourself",
+    description: "Steal people's cape and use it yourself.",
     href: '/tools/cape-stealer' as const,
     icon: CAPE_STEALER_ICON,
   },
@@ -42,6 +42,12 @@ const utils = [
     description: 'Convert your text to a smaller one supported by Minecraft.',
     href: '/tools/small-text' as const,
     icon: SMALL_TEXT_CONVERTER_ICON,
+  },
+  {
+    name: 'Gradient Generator',
+    description: 'Generate a gradient color for your text ready to be used.',
+    href: '/tools/gradient-generator' as const,
+    icon: GRADIENT_GENERATOR_ICON,
   }
 ];
 
