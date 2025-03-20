@@ -31,10 +31,7 @@ export default function smalltext() {
   }
   
   const copyToClipboard = () => {
-    if (convertedText) {
-      Clipboard.setStringAsync(convertedText);
-      Alert.alert('Copied', 'Text copied to clipboard!');
-    }
+    if (convertedText) Clipboard.setStringAsync(convertedText);
   }
   
   return (
