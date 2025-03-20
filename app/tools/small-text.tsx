@@ -1,13 +1,15 @@
 import { Button } from '@/components/Button';
 import { Input } from '@/components/Input';
 import * as Clipboard from 'expo-clipboard';
-import {useState} from 'react'
-import { Text, View, ScrollView, Alert} from 'react-native';
+import { useState } from 'react'
+import { Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 
 export default function smalltext() {
 
   const [text, setText] = useState<string>('');
   const [convertedText, setConvertedText] = useState<string>('');
+  const [copied, setCopied] = useState<boolean>(false);
 
   const convertText = () => {
     const normalAlphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZĞŞÇÜİÖĄĆĘŁŃÓŚŹŻ';
@@ -30,10 +32,11 @@ export default function smalltext() {
     setConvertedText(finalText);
   }
   
-  const copyToClipboard = () => {
+  const copyToClipboard = async () => {
     if (convertedText) {
-      Clipboard.setStringAsync(convertedText);
-      Alert.alert('Copied', 'Text copied to clipboard!');
+      await Clipboard.setStringAsync(convertedText);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
     }
   }
   
@@ -48,23 +51,34 @@ export default function smalltext() {
             value={text}
             onChangeText={setText}
             placeholder="Enter the text to convert"
-            className="bg-black text-white min-h-[100px]"
+            className="bg-black text-white min-h-[100px] pr-2"
             multiline={true}
             textAlignVertical="top"
             scrollEnabled={true}
           />
         </View>
         
-        <View className="w-80 mb-24">
+        <View className="w-80 mb-24 relative">
           <Input
             value={convertedText}
             editable={false}
             placeholder="Converted text will appear here"
-            className="bg-black text-white min-h-[100px]"
+            className="bg-black text-white min-h-[100px] pr-16"
             multiline={true}
             textAlignVertical="top"
             scrollEnabled={true}
           />
+          <TouchableOpacity 
+            onPress={copyToClipboard} 
+            className="absolute right-3 top-3"
+            disabled={!convertedText}
+          >
+            <Ionicons 
+              name={copied ? "checkmark-circle" : "copy-outline"} 
+              size={24} 
+              color={convertedText ? "#60a5fa" : "#9ca3af"} 
+            />
+          </TouchableOpacity>
         </View>
         
         <View className='flex-row justify-between w-80 gap-2'>
@@ -73,12 +87,6 @@ export default function smalltext() {
             className="rounded bg-white flex-1"
           >
             <Text className="text-black font-semibold text-center">Convert Text</Text>
-          </Button>
-          <Button
-            onPress={copyToClipboard}
-            className="rounded bg-blue-200 flex-1"
-          >
-            <Text className="text-black font-semibold text-center">Copy Text</Text>
           </Button>
         </View>
       </View>
