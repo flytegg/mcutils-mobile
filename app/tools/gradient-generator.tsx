@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { Text, View, ScrollView, TouchableOpacity, Modal } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import ColorPicker from 'react-native-wheel-color-picker';
+import { LinearGradient } from 'expo-linear-gradient';
 
 export default function gradientgenerator() {
   const [firstColor, setFirstColor] = useState<string>('#FF5733');
@@ -52,8 +53,17 @@ export default function gradientgenerator() {
   return (
     <ScrollView>
       <View className='flex-1 p-8'>
-        <Text className='text-white text-3xl font-bold uppercase text-center p-4'>Gradient Generator</Text>
-        <Text className='text-gray-200 text-xs text-center mb-5'>
+        <Text className='text-white text-3xl font-bold uppercase text-center'>
+            Gradient Generator
+        </Text>
+        <LinearGradient
+          colors={[firstColor, secondColor]}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 0 }}
+          className="rounded-lg p-4"
+        ><Text></Text>
+        </LinearGradient>
+        <Text className='text-gray-200 text-xs text-center mb-5 mt-2'>
           Generate gradient colors for your Minecraft server.
         </Text>
 
