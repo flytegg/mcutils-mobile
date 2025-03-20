@@ -53,11 +53,11 @@ export default function gradientgenerator() {
     <ScrollView>
       <View className='flex-1 p-8'>
         <Text className='text-white text-3xl font-bold uppercase text-center p-4'>Gradient Generator</Text>
-        <Text className='text-gray-200 text-xs text-center mb-8'>
+        <Text className='text-gray-200 text-xs text-center mb-5'>
           Generate gradient colors for your Minecraft server.
         </Text>
 
-        <View className="flex-row justify-center gap-4 mb-6">
+        <View className="flex-row justify-center gap-4">
           <View className="items-center">
             <Button
               onPress={() => setShowFirstPicker(true)}
@@ -77,7 +77,7 @@ export default function gradientgenerator() {
           </View>
         </View>
 
-        <View className="flex-1 mb-4 relative">
+        <View className=" relative mt-6">
           <Text className='text-white text-xs mb-2'>Chat Message</Text>
           <Input
             value={gradient}
