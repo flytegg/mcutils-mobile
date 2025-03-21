@@ -23,7 +23,7 @@ If you're using VS Code, we recommend installing these extensions:
 1. Clone the GitHub repository to your machine
 2. Open terminal in the project folder
 3. Run `bun install`
-4. Run `npx expo start` to launch the app
+4. Run `bun run start` to launch the app
 5. Download `Expo Go` on your phone (ensure both devices are on the same network)
 6. Scan the QR code displayed in the console
 
