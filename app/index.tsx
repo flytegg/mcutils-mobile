@@ -48,7 +48,7 @@ const utils = [
     description: 'Generate a gradient color for your text ready to be used.',
     href: '/tools/gradient-generator' as const,
     icon: GRADIENT_GENERATOR_ICON,
-  }
+  },
 ];
 
 export default function Home() {

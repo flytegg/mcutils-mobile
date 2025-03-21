@@ -4,8 +4,9 @@ import * as Clipboard from 'expo-clipboard';
 import { useState } from 'react';
 import { Text, View, ScrollView, TouchableOpacity, Modal } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import ColorPicker from 'react-native-wheel-color-picker';
 import { LinearGradient } from 'expo-linear-gradient';
+import MaskedView from '@react-native-masked-view/masked-view';
+import ColorPicker from 'react-native-wheel-color-picker';
 
 export default function gradientgenerator() {
   const [firstColor, setFirstColor] = useState<string>('#FF5733');
@@ -52,18 +53,23 @@ export default function gradientgenerator() {
   
   return (
     <ScrollView>
-      <View className='flex-1 p-8'>
-        <Text className='text-white text-3xl font-bold uppercase text-center'>
-            Gradient Generator
-        </Text>
-        <LinearGradient
-          colors={[firstColor, secondColor]}
-          start={{ x: 0, y: 0 }}
-          end={{ x: 1, y: 0 }}
-          className="rounded-lg p-4"
-        ><Text></Text>
-        </LinearGradient>
-        <Text className='text-gray-200 text-xs text-center mb-5 mt-2'>
+      <View className='flex-1 p-6'>
+        <MaskedView
+          style={{ height: 80 }}
+          maskElement={
+            <Text style={{ fontSize: 30, fontWeight: 'bold' }} className='text-center uppercase'>
+              Gradient Generator
+            </Text>
+          }
+        >
+          <LinearGradient
+            colors={[firstColor, secondColor]}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 0 }}
+            style={{ flex: 1 }}
+          />
+        </MaskedView>
+        <Text className='text-gray-200 text-xs text-center mb-3 mt-[-30px]'>
           Generate gradient colors for your Minecraft server.
         </Text>
 
@@ -149,7 +155,7 @@ export default function gradientgenerator() {
           animationType="fade"
           onRequestClose={() => setShowFirstPicker(false)}
         >
-          <View className='flex-1 justify-center mt-44 bg-none'>
+          <View className='flex-1 justify-center mt-40 bg-none'>
             <View className='p-3 rounded-t-lg'>
               <ColorPicker
                 color={firstColor}
@@ -177,7 +183,7 @@ export default function gradientgenerator() {
           animationType="fade"
           onRequestClose={() => setShowSecondPicker(false)}
         >
-          <View className='flex-1 justify-center mt-44 bg-none'>
+          <View className='flex-1 justify-center mt-40 bg-none'>
             <View className='p-3 rounded-t-lg'>
               <ColorPicker
                 color={secondColor}

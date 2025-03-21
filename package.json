@@ -33,6 +33,7 @@
     "expo": "^52.0.39",
     "expo-clipboard": "~7.0.1",
     "expo-constants": "~17.0.8",
+    "expo-linear-gradient": "^14.0.2",
     "expo-linking": "~7.0.5",
     "expo-router": "~4.0.19",
     "expo-status-bar": "~2.0.1",
@@ -56,8 +57,7 @@
     "tailwind-merge": "^3.0.2",
     "tailwindcss-animate": "^1.0.7",
     "use-debounce": "^10.0.4",
-    "zustand": "^4.5.1",
-    "expo-linear-gradient": "~14.0.2"
+    "zustand": "^4.5.1"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
