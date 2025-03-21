@@ -43,7 +43,7 @@ We maintain a library of reusable components to ensure consistent styling across
 - `Button`: Custom button component
 - `Input`: Custom input component
 
-### Adding a New Tool
+### Adding a New Util
 
 1. Create a new component in the `app/tools` directory
 2. Create the default export for your component
