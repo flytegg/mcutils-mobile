@@ -100,8 +100,9 @@ export default function gradientgenerator() {
             editable={false}
             placeholder="Minecraft Chat Message..."
             className="bg-black text-white min-h-[30px] pr-12 px-4"
-            multiline={true}
+            multiline={false}
             textAlignVertical="center"
+            placeholderTextColor="#6b7280"
             scrollEnabled={true}
           />
           <TouchableOpacity
@@ -123,8 +124,9 @@ export default function gradientgenerator() {
             editable={false}
             placeholder="MiniMessage equivalent..."
             className="bg-black text-white min-h-[30px] pr-12 px-4"
-            multiline={true}
+            multiline={false}
             textAlignVertical="center"
+            placeholderTextColor="#6b7280"
             scrollEnabled={true}
           />
           <TouchableOpacity
