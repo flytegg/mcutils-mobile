@@ -9,7 +9,7 @@ For support or to chat with the team, join our [Discord](https://discord.gg/flyt
 ## 📝 Contributing
 
 ### Prerequisites
-- Node.js 16 or higher
+- Bun 1.0 or higher
 - Expo CLI
 - A code editor
 
@@ -22,7 +22,7 @@ If you're using VS Code, we recommend installing these extensions:
 ### Setup
 1. Clone the GitHub repository to your machine
 2. Open terminal in the project folder
-3. Run `npm install`
+3. Run `bun install`
 4. Run `npx expo start` to launch the app
 5. Download `Expo Go` on your phone (ensure both devices are on the same network)
 6. Scan the QR code displayed in the console
@@ -40,8 +40,12 @@ We use:
 #### Reusable Components
 We maintain a library of reusable components to ensure consistent styling across the app:
 
-- `Button`: Custom button component
-- `Input`: Custom input component
+- `Button`: Custom button component with various styles and states
+- `Card`: Flexible card component for content organization
+- `Input`: Custom input component with consistent styling
+- `Logo`: App logo component with customizable properties
+- `Text`: Typography component for consistent text styling
+- `ThemeProvider`: Context provider for app-wide theme management
 
 ### Adding a New Util
 
