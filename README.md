@@ -2,9 +2,9 @@
 
 **MC Utils Mobile** is the official mobile version of MC Utils, a collection of Minecraft utilities designed for developers, builders, and players. The app offers a set of tools optimized for mobile devices, with a modern and intuitive interface.
 
-The project is powered by the Flyte team and our generous contributors.
+The project is powered by the [Flyte](https://flyte.gg) team and our generous contributors.
 
-For support or to chat with the team, join our Discord:
+For support or to chat with the team, join our [Discord](https://discord.gg/flyte)
 
 ## 📝 Contributing
 
