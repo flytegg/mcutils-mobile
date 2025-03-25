@@ -4,26 +4,7 @@ import { Text } from '@/components/Text';
 import { cn } from '@/lib/utils';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import { colorCodes } from '../_constants/chatcolors';
-
-const formatCodes = [
-  { code: '§k', name: 'Magic', description: 'Makes text randomized', className: 'obfuscated' },
-  { code: '§l', name: 'Bold', description: 'Makes text bold', className: 'font-bold' },
-  {
-    code: '§m',
-    name: 'Strikethrough',
-    description: 'Adds a line through text',
-    className: 'line-through',
-  },
-  {
-    code: '§n',
-    name: 'Underline',
-    description: 'Adds an underline to text',
-    className: 'underline',
-  },
-  { code: '§o', name: 'Italic', description: 'Makes text italic', className: 'italic' },
-  { code: '§r', name: 'Reset', description: 'Resets all formatting', className: '' },
-];
+import { colorCodes, formatCodes } from '../_constants/chatcolors';
 
 let obfuscated = 'MCUtils';
 

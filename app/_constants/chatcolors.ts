@@ -1,4 +1,4 @@
-const colorCodes = [
+export const colorCodes = [
   { code: '§0', name: 'Black', hex: '#000000' },
   { code: '§1', name: 'Dark Blue', hex: '#0000AA' },
   { code: '§2', name: 'Dark Green', hex: '#00AA00' },
@@ -15,6 +15,26 @@ const colorCodes = [
   { code: '§d', name: 'Light Purple', hex: '#FF55FF' },
   { code: '§e', name: 'Yellow', hex: '#FFFF55' },
   { code: '§f', name: 'White', hex: '#FFFFFF' },
+];
+
+
+export const formatCodes = [
+  { code: '§k', name: 'Magic', description: 'Makes text randomized', className: 'obfuscated' },
+  { code: '§l', name: 'Bold', description: 'Makes text bold', className: 'font-bold' },
+  {
+    code: '§m',
+    name: 'Strikethrough',
+    description: 'Adds a line through text',
+    className: 'line-through',
+  },
+  {
+    code: '§n',
+    name: 'Underline',
+    description: 'Adds an underline to text',
+    className: 'underline',
+  },
+  { code: '§o', name: 'Italic', description: 'Makes text italic', className: 'italic' },
+  { code: '§r', name: 'Reset', description: 'Resets all formatting', className: '' },
 ];
 
 export default colorCodes;
