@@ -1,4 +1,4 @@
-import { COLOR_CODES_ICON, ITEM_IDS_ICON, SERVER_INFO_ICON, CAPE_STEALER_ICON, SMALL_TEXT_CONVERTER_ICON, GRADIENT_GENERATOR_ICON, INVENTORY_SLOTS_ICON } from '@/app/_constants/icons';
+import { COLOR_CODES_ICON, ITEM_IDS_ICON, SERVER_INFO_ICON, CAPE_STEALER_ICON, SMALL_TEXT_CONVERTER_ICON, GRADIENT_GENERATOR_ICON, INVENTORY_SLOTS_ICON, UNICODE_SYMBOLS_ICON } from '@/app/_constants/icons';
 import { Button } from '@/components/Button';
 import { Logo } from '@/components/Logo';
 import { Text } from '@/components/Text';
@@ -48,6 +48,12 @@ const utils = [
     description: 'Generate a gradient color for your text ready to be used.',
     href: '/tools/gradient-generator' as const,
     icon: GRADIENT_GENERATOR_ICON,
+  },
+  {
+    name: 'Unicode Symbols',
+    description: 'Copy and paste Unicode symbols.',
+    href: '/tools/unicode-symbols' as const,
+    icon: UNICODE_SYMBOLS_ICON,
   },
 ];
 
