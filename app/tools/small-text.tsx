@@ -4,6 +4,7 @@ import * as Clipboard from 'expo-clipboard';
 import { useState } from 'react'
 import { Text, View, ScrollView, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { alphabet } from '@/lib/utils';
 
 export default function smalltext() {
 
@@ -12,7 +13,6 @@ export default function smalltext() {
   const [copied, setCopied] = useState<boolean>(false);
 
   const convertText = () => {
-    const normalAlphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZĞŞÇÜİÖĄĆĘŁŃÓŚŹŻ';
     const smallTextAlphabet = 'ᴀʙᴄᴅᴇꜰɢʜɪᴊᴋʟᴍɴᴏᴘǫʀѕᴛᴜᴠᴡxʏᴢğşçüiöąćęłńóśźż';
 
     const uppercaseText = text.toUpperCase();
@@ -20,7 +20,7 @@ export default function smalltext() {
 
     for (let i = 0; i < uppercaseText.length; i++) {
       const char = uppercaseText[i];
-      const index = normalAlphabet.indexOf(char);
+      const index = alphabet.indexOf(char);
 
       if (index !== -1) {
         finalText += smallTextAlphabet[index];
