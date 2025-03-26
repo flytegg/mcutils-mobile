@@ -4,37 +4,42 @@ import { BOOK, KICK, LORE, SIGN, MOTD, NAME, TextType } from '../_constants/text
 import { Text } from '@/components/Text';
 import colorCodes, { formatCodes } from '../_constants/chatcolors';
 import { Input } from '@/components/Input';
-import { alphabet, cn } from '@/lib/utils';
+import { cn } from '@/lib/utils';
 import { Ionicons } from '@expo/vector-icons';
 import * as Clipboard from 'expo-clipboard';
 import { Picker } from '@react-native-picker/picker';
 import { SvgXml } from 'react-native-svg';
 
 function getRandomLetter() {
+  const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
   const randomIndex = Math.floor(Math.random() * alphabet.length);
   return alphabet[randomIndex];
 }
 
-const ObfuscatedText = ({ text }: { text: string }) => {
+function getObfuscatedString(text: string) {
+  let newString = '';
+  for (let i = 0; i < text.length; i++) {
+    const char = text[i];
+    if (char !== ' ') {
+      newString += getRandomLetter();
+    } else {
+      newString += ' ';
+    }
+  }
+  return newString;
+}
+
+const ObfuscatedText = ({ text, color }: { text: string, color: string }) => {
   const [obfuscatedText, setObfuscatedText] = useState(text);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      let newString = '';
-      for (let i = 0; i < text.length; i++) {
-        const char = text[i];
-        if (char !== ' ') {
-          newString += getRandomLetter();
-        } else {
-          newString += ' ';
-        }
-      }
-      setObfuscatedText(newString);
+      setObfuscatedText(getObfuscatedString(text));
     }, 80);
     return () => clearInterval(interval);
   }, [text]);
 
-  return <Text style={{ color: 'white' }}>{obfuscatedText}</Text>;
+  return <Text style={{ color }}>{obfuscatedText}</Text>;
 };
 
 export default function ColorText() {
@@ -57,51 +62,81 @@ export default function ColorText() {
   }
 
   const renderFormattedText = (text: string) => {
-    const parts = text.split(/(§[0-9a-fklmnor])/);
     let currentColor = '#ffffff';
-    let currentStyle = '';
+    let isBold = false;
+    let isItalic = false;
+    let isUnderline = false;
+    let isStrikethrough = false;
     let isObfuscated = false;
-    
-    return parts.filter(part => part).map((part, index) => {
-      if (part.startsWith('§')) {
-        const code = part;
-        const colorMatch = colorCodes.find(c => c.code === code);
-        if (colorMatch) {
-          currentColor = colorMatch.hex;
-          return null;
-        }
-        const formatMatch = formatCodes.find(f => f.code === code);
-        if (formatMatch) {
-          if (code === '§k') {
-            isObfuscated = true;
-          } else if (code === '§r') {
-            currentColor = '#ffffff';
-            currentStyle = '';
-            isObfuscated = false;
-          } else {
-            currentStyle = formatMatch.className;
-          }
-          return null;
-        }
-        return null;
-      }
-      
-      return part && (
+    let currentText = '';
+    const result: React.ReactNode[] = [];
+
+    const applyText = () => {
+      if (!currentText) return;
+      result.push(
         isObfuscated ? (
-          <ObfuscatedText key={index} text={part} />
+          <ObfuscatedText key={result.length} text={currentText} color={currentColor} />
         ) : (
           <Text 
-            key={index} 
-            className={cn('', currentStyle)}
+            key={result.length}
+            className={selectedType.textStyle}
             style={{ 
               color: currentColor,
+              fontWeight: isBold ? 'bold' : 'normal',
+              fontStyle: isItalic ? 'italic' : 'normal',
+              textDecorationLine: isUnderline 
+                ? isStrikethrough 
+                  ? 'underline line-through'
+                  : 'underline'
+                : isStrikethrough 
+                  ? 'line-through'
+                  : 'none'
             }}
           >
-            {part}
+            {currentText}
           </Text>
         )
       );
-    }).filter(Boolean);
+      currentText = '';
+    };
+
+    for (let i = 0; i < text.length; i++) {
+      if (text[i] === '§' && i + 1 < text.length) {
+        applyText();
+        const code = text[i + 1];
+        const formatCode = '§' + code;
+        
+        const colorMatch = colorCodes.find(c => c.code === formatCode);
+        if (colorMatch) {
+          currentColor = colorMatch.hex;
+          i++;
+          continue;
+        }
+
+        switch (formatCode) {
+          case '§l': isBold = true; break;
+          case '§o': isItalic = true; break;
+          case '§n': isUnderline = true; break;
+          case '§m': isStrikethrough = true; break;
+          case '§k': isObfuscated = true; break;
+          case '§r':
+            currentColor = '#ffffff';
+            isBold = isItalic = isUnderline = isStrikethrough = isObfuscated = false;
+            break;
+        }
+        i++;
+      } else {
+        currentText += text[i];
+      }
+    }
+
+    applyText();
+
+    return (
+      <View style={{ flexDirection: 'row' }} className={selectedType.textStyle}>
+        {result}
+      </View>
+    );
   };
 
   return (
@@ -188,9 +223,7 @@ export default function ColorText() {
           height={150} 
         />
         <View className="absolute">
-          <View className="flex-row flex-wrap">
-            {renderFormattedText(text)}
-          </View>
+          {renderFormattedText(text)}
         </View>
       </View>
 

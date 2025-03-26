@@ -25,7 +25,7 @@ export const BOOK: TextType = {
 export const KICK: TextType = {
     id: 'kick',
     name: 'Kick',
-    textStyle: 'text-md',
+    textStyle: 'text-md w-64 h-36 mt-8',
     image: `<svg width="1109" height="575" viewBox="0 0 1109 575" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <rect width="1109" height="575" fill="url(#pattern0)"/>
     <defs>
@@ -55,7 +55,7 @@ export const LORE: TextType = {
 export const MOTD: TextType = {
     id: 'motd',
     name: 'Motd',
-    textStyle: 'text-md',
+    textStyle: 'text-md w-64 h-12 ml-12',
     image: `<svg width="773" height="149" viewBox="0 0 773 149" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <rect width="773" height="149" fill="url(#pattern0)"/>
     <defs>
@@ -70,7 +70,7 @@ export const MOTD: TextType = {
 export const NAME: TextType = {
     id: 'name',
     name: 'Name',
-    textStyle: 'text-md',
+    textStyle: 'text-md w-64 h-10',
     image: `<svg width="550" height="85" viewBox="0 0 550 85" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <rect width="550" height="85" fill="url(#pattern0)"/>
     <defs>
@@ -99,7 +99,7 @@ export const CHAT: TextType = {
 export const SIGN : TextType = {
     id: 'sign',
     name: 'Sign',
-    textStyle: 'text-md',
+    textStyle: 'text-md w-64 h-36',
     image: `<?xml version="1.0" encoding="UTF-8"?>
         <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="601" height="300">
         <path d="M0 0 C198.33 0 396.66 0 601 0 C601 99 601 198 601 300 C402.67 300 204.34 300 0 300 C0 201 0 102 0 0 Z " fill="#937947" transform="translate(0,0)"/>
