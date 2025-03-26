@@ -8,7 +8,7 @@ export interface TextType {
 }
 
 export const BOOK: TextType = {
-    id: 'bool',
+    id: 'book',
     name: 'Book',
     textStyle: 'text-md w-24 h-36',
     image: `<svg width="146" height="180" viewBox="0 0 146 180" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -55,7 +55,7 @@ export const LORE: TextType = {
 export const MOTD: TextType = {
     id: 'motd',
     name: 'Motd',
-    textStyle: 'text-md w-64 h-12 ml-12',
+    textStyle: 'text-md w-64 h-6 ml-12 mb-2',
     image: `<svg width="773" height="149" viewBox="0 0 773 149" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <rect width="773" height="149" fill="url(#pattern0)"/>
     <defs>

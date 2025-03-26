@@ -1,32 +1,24 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { ScrollView, TouchableOpacity, View } from 'react-native';
 import { BOOK, KICK, LORE, SIGN, MOTD, NAME, TextType } from '../_constants/text-generator';
 import { Text } from '@/components/Text';
 import colorCodes, { formatCodes } from '../_constants/chatcolors';
 import { Input } from '@/components/Input';
-import { cn } from '@/lib/utils';
+import { alphabet, cn } from '@/lib/utils';
 import { Ionicons } from '@expo/vector-icons';
 import * as Clipboard from 'expo-clipboard';
 import { Picker } from '@react-native-picker/picker';
 import { SvgXml } from 'react-native-svg';
 
 function getRandomLetter() {
-  const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
   const randomIndex = Math.floor(Math.random() * alphabet.length);
   return alphabet[randomIndex];
 }
 
-function getObfuscatedString(text: string) {
-  let newString = '';
-  for (let i = 0; i < text.length; i++) {
-    const char = text[i];
-    if (char !== ' ') {
-      newString += getRandomLetter();
-    } else {
-      newString += ' ';
-    }
-  }
-  return newString;
+function getObfuscatedString(text: string): string {
+  return text.split('').map(char => 
+    char === ' ' ? ' ' : getRandomLetter()
+  ).join('');
 }
 
 const ObfuscatedText = ({ text, color }: { text: string, color: string }) => {
@@ -39,13 +31,13 @@ const ObfuscatedText = ({ text, color }: { text: string, color: string }) => {
     return () => clearInterval(interval);
   }, [text]);
 
-  return <Text style={{ color }}>{obfuscatedText}</Text>;
+  return <Text style={{ color, fontFamily: 'Minecraft' }}>{obfuscatedText}</Text>;
 };
 
 export default function ColorText() {
   const [text, setText] = useState<string>('')
   const [copied, setCopied] = useState<boolean>(false);
-  const [selectedType, setSelectedType] = useState<TextType>(BOOK);
+  const [selectedType, setSelectedType] = useState<TextType>(SIGN);
 
   const textTypes: TextType[] = [SIGN, BOOK, KICK, MOTD, NAME, LORE];
 
@@ -62,82 +54,102 @@ export default function ColorText() {
   }
 
   const renderFormattedText = (text: string) => {
-    let currentColor = '#ffffff';
-    let isBold = false;
-    let isItalic = false;
-    let isUnderline = false;
-    let isStrikethrough = false;
-    let isObfuscated = false;
-    let currentText = '';
-    const result: React.ReactNode[] = [];
+    interface TextSegment {
+      text: string;
+      color: string;
+      bold: boolean;
+      italic: boolean;
+      underline: boolean;
+      strikethrough: boolean;
+      obfuscated: boolean;
+    }
 
-    const applyText = () => {
-      if (!currentText) return;
-      result.push(
-        isObfuscated ? (
-          <ObfuscatedText key={result.length} text={currentText} color={currentColor} />
-        ) : (
-          <Text 
-            key={result.length}
-            className={selectedType.textStyle}
-            style={{ 
-              color: currentColor,
-              fontWeight: isBold ? 'bold' : 'normal',
-              fontStyle: isItalic ? 'italic' : 'normal',
-              textDecorationLine: isUnderline 
-                ? isStrikethrough 
-                  ? 'underline line-through'
-                  : 'underline'
-                : isStrikethrough 
-                  ? 'line-through'
-                  : 'none'
-            }}
-          >
-            {currentText}
-          </Text>
-        )
-      );
-      currentText = '';
-    };
+    const createDefaultSegment = (): TextSegment => ({
+      text: '',
+      color: '#ffffff',
+      bold: false,
+      italic: false,
+      underline: false,
+      strikethrough: false,
+      obfuscated: false
+    });
+
+    const segments: TextSegment[] = [];
+    let currentSegment = createDefaultSegment();
 
     for (let i = 0; i < text.length; i++) {
       if (text[i] === '§' && i + 1 < text.length) {
-        applyText();
-        const code = text[i + 1];
-        const formatCode = '§' + code;
+        const formatCode = '§' + text[i + 1];
         
+        if (currentSegment.text) {
+          segments.push({...currentSegment});
+          currentSegment.text = '';
+        }
+
         const colorMatch = colorCodes.find(c => c.code === formatCode);
         if (colorMatch) {
-          currentColor = colorMatch.hex;
-          i++;
-          continue;
-        }
-
-        switch (formatCode) {
-          case '§l': isBold = true; break;
-          case '§o': isItalic = true; break;
-          case '§n': isUnderline = true; break;
-          case '§m': isStrikethrough = true; break;
-          case '§k': isObfuscated = true; break;
-          case '§r':
-            currentColor = '#ffffff';
-            isBold = isItalic = isUnderline = isStrikethrough = isObfuscated = false;
-            break;
+          currentSegment.color = colorMatch.hex;
+        } else {
+          switch (formatCode) {
+            case '§l': currentSegment.bold = true; break;
+            case '§o': currentSegment.italic = true; break;
+            case '§n': currentSegment.underline = true; break;
+            case '§m': currentSegment.strikethrough = true; break;
+            case '§k': currentSegment.obfuscated = true; break;
+            case '§r': currentSegment = createDefaultSegment(); break;
+          }
         }
         i++;
-      } else {
-        currentText += text[i];
+        continue;
       }
+      currentSegment.text += text[i];
     }
 
-    applyText();
+    if (currentSegment.text) segments.push(currentSegment);
 
     return (
-      <View style={{ flexDirection: 'row' }} className={selectedType.textStyle}>
-        {result}
+      <View className={selectedType.textStyle}>
+        <Text 
+          className={selectedType.textStyle}
+          style={{ 
+            fontFamily: 'minecraft',
+            fontSize: 12,
+            textAlign: 'center'
+          }}
+        >
+          {segments.map((segment, index) => 
+            segment.obfuscated ? (
+              <ObfuscatedText key={index} text={segment.text} color={segment.color} />
+            ) : (
+              <Text 
+                key={index}
+                style={{ 
+                  color: segment.color,
+                  fontWeight: segment.bold ? 'bold' : 'normal',
+                  fontStyle: segment.italic ? 'italic' : 'normal',
+                  textDecorationLine: segment.underline 
+                    ? segment.strikethrough 
+                      ? 'underline line-through'
+                      : 'underline'
+                    : segment.strikethrough 
+                      ? 'line-through'
+                      : 'none',
+                  fontFamily: 'minecraft',
+                  fontSize: 12,
+                  textShadowColor: segment.bold ? segment.color : 'transparent',
+                  textShadowOffset: segment.bold ? { width: 0.5, height: 0 } : { width: 0, height: 0 },
+                  textShadowRadius: segment.bold ? 0.5 : 0
+                }}
+              >
+                {segment.text}
+              </Text>
+            )
+          )}
+        </Text>
       </View>
     );
   };
+
 
   return (
     <ScrollView>
